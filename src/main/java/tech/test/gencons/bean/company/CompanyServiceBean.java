@@ -86,7 +86,7 @@ public class CompanyServiceBean implements CompanyService
 				return Optional.empty();
 
 			// ensure entity ok
-			entity.getId();
+			entity.getName();
 			return Optional.of(entity);
 		}
 		catch (EntityNotFoundException e)

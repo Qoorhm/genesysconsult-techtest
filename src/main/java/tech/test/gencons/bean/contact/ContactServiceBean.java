@@ -111,7 +111,7 @@ public class ContactServiceBean implements ContactService
 				return Optional.empty();
 
 			// ensure entity ok
-			entity.getId();
+			entity.getName();
 			return Optional.of(entity);
 		}
 		catch (EntityNotFoundException e)
