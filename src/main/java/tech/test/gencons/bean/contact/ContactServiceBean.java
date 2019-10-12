@@ -80,7 +80,26 @@ public class ContactServiceBean implements ContactService
 		if (!StringUtils.isEmpty(telephone))
 			contact.setTelephone(telephone);
 
-		// TODO companies
+		if (companies != null)
+		{
+			for (CompanyEntity company : contact.getCompanies())
+			{
+				company.getContacts().remove(contact);
+			}
+
+			contact.getCompanies().clear();
+
+			for (Long companyId : companies)
+			{
+				Optional<CompanyEntity> comp = companyService.getEntity(companyId);
+
+				if (comp.isPresent())
+				{
+					contact.getCompanies().add(comp.get());
+					comp.get().getContacts().add(contact);
+				}
+			}
+		}
 
 		repository.save(contact);
 
@@ -90,11 +109,16 @@ public class ContactServiceBean implements ContactService
 	@Override
 	public boolean deleteContact(long id)
 	{
-		Optional<ContactEntity> company = get(id);
+		Optional<ContactEntity> contact = get(id);
 
-		if (company.isPresent())
+		if (contact.isPresent())
 		{
-			repository.delete(company.get());
+			for (CompanyEntity company : contact.get().getCompanies())
+			{
+				company.getContacts().remove(contact.get());
+			}
+
+			repository.delete(contact.get());
 			return true;
 		}
 

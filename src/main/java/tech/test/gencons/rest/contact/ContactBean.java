@@ -1,6 +1,5 @@
 package tech.test.gencons.rest.contact;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ContactBean
@@ -15,7 +14,7 @@ public class ContactBean
 
 	private boolean freelance;
 
-	private List<ContactCompanyBean> companies = Collections.emptyList();
+	private List<ContactCompanyBean> companies;
 
 	public ContactBean()
 	{
