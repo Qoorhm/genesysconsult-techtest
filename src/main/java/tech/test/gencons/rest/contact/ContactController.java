@@ -42,7 +42,7 @@ public class ContactController
 	@PostMapping
 	public ResponseEntity<ContactBean> create(@RequestBody ContactBean contact)
 	{
-		if (StringUtils.isEmpty(contact.getName()) || StringUtils.isEmpty(contact.getTelephone()))
+		if (StringUtils.isEmpty(contact.getName()) || StringUtils.isEmpty(contact.getFirstName()))
 			return ResponseEntity.badRequest().build();
 
 		if (contact.isFreelance() && Strings.isEmpty(contact.getTaxNumber()))
@@ -55,7 +55,7 @@ public class ContactController
 				.collect(Collectors.toSet());
 
 		Optional<Contact> createdContact = contactService.createContact(contact.getName(),
-				Optional.ofNullable(contact.getTaxNumber()), contact.getTelephone(), companyIds);
+				Optional.ofNullable(contact.getTaxNumber()), contact.getFirstName(), companyIds);
 
 		if (!createdContact.isPresent()) // creation ko ? bas request
 			return ResponseEntity.badRequest().build();
@@ -74,7 +74,7 @@ public class ContactController
 		ContactBean res = new ContactBean();
 		res.setId(contact.getId());
 		res.setName(contact.getName());
-		res.setTelephone(contact.getTelephone());
+		res.setFirstName(contact.getFirstName());
 		res.setFreelance(contact.isFreelance());
 		contact.getTaxCode().ifPresent(c -> res.setTaxNumber(c));
 		res.setCompanies(contact.getCompanies().stream().map(c -> new ContactCompanyBean(c.getId(), c.getName()))
@@ -105,7 +105,7 @@ public class ContactController
 				.collect(Collectors.toSet());
 
 		return response(contactService.updateContact(id, contact.getName(), Optional.ofNullable(contact.getTaxNumber()),
-				contact.getTelephone(), companyIds));
+				contact.getFirstName(), companyIds));
 	}
 
 	private static ResponseEntity<ContactBean> response(Optional<Contact> contact)

@@ -8,7 +8,7 @@ public class ContactBean
 
 	private String name;
 
-	private String telephone;
+	private String firstName;
 
 	private String taxNumber;
 
@@ -41,14 +41,14 @@ public class ContactBean
 		this.name = name;
 	}
 
-	public String getTelephone()
+	public String getFirstName()
 	{
-		return telephone;
+		return firstName;
 	}
 
-	public void setTelephone(String telephone)
+	public void setFirstName(String firstName)
 	{
-		this.telephone = telephone;
+		this.firstName = firstName;
 	}
 
 	public String getTaxNumber()

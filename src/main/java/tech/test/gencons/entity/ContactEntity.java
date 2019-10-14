@@ -21,7 +21,7 @@ public class ContactEntity
 
 	private String taxCode;
 
-	private String telephone;
+	private String firstName;
 
 	@ManyToMany(mappedBy = "contacts", fetch = FetchType.LAZY)
 	private Set<CompanyEntity> companies = new HashSet<>();
@@ -71,14 +71,14 @@ public class ContactEntity
 		this.companies = companies;
 	}
 
-	public String getTelephone()
+	public String getFirstName()
 	{
-		return telephone;
+		return firstName;
 	}
 
-	public void setTelephone(String telephone)
+	public void setFirstName(String firstName)
 	{
-		this.telephone = telephone;
+		this.firstName = firstName;
 	}
 
 }

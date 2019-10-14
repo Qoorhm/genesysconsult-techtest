@@ -32,11 +32,11 @@ public class ContactServiceBean implements ContactService
 	}
 
 	@Override
-	public Optional<Contact> createContact(String name, Optional<String> taxCode, String telephone, Set<Long> companies)
+	public Optional<Contact> createContact(String name, Optional<String> taxCode, String firstName, Set<Long> companies)
 	{
 		ContactEntity contact = new ContactEntity();
 		contact.setName(name);
-		contact.setTelephone(telephone);
+		contact.setFirstName(firstName);
 		taxCode.ifPresent(code -> contact.setTaxCode(code));
 
 		for (Long companyId : companies)
@@ -62,7 +62,7 @@ public class ContactServiceBean implements ContactService
 	}
 
 	@Override
-	public Optional<Contact> updateContact(long id, String name, Optional<String> taxCode, String telephone,
+	public Optional<Contact> updateContact(long id, String name, Optional<String> taxCode, String firstName,
 			Set<Long> companies)
 	{
 		Optional<ContactEntity> c = get(id);
@@ -77,8 +77,8 @@ public class ContactServiceBean implements ContactService
 
 		taxCode.ifPresent(tc -> contact.setTaxCode(tc));
 
-		if (!StringUtils.isEmpty(telephone))
-			contact.setTelephone(telephone);
+		if (!StringUtils.isEmpty(firstName))
+			contact.setFirstName(firstName);
 
 		if (companies != null)
 		{
@@ -172,9 +172,9 @@ public class ContactServiceBean implements ContactService
 		}
 
 		@Override
-		public String getTelephone()
+		public String getFirstName()
 		{
-			return entity.getTelephone();
+			return entity.getFirstName();
 		}
 
 		@Override

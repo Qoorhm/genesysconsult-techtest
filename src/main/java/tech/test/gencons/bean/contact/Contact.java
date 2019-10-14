@@ -11,7 +11,7 @@ public interface Contact
 
 	Optional<String> getTaxCode();
 
-	String getTelephone();
+	String getFirstName();
 
 	boolean isFreelance();
 
